@@ -13,7 +13,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile
   (NAME         => 'FCGI::ProcManager',
-   VERSION_FROM => 'ProcManager.pm',   # finds $VERSION
+   VERSION_FROM => 'lib/FCGI/ProcManager.pm',   # finds $VERSION
    DISTNAME     => 'FCGI-ProcManager',
    ($] >= 5.005 ?
     (ABSTRACT   => 'A perl-based FastCGI process manager',
