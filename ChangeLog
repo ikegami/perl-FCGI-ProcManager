@@ -1,3 +1,12 @@
+0.19 2009-07-22 Gareth Kirwan  <gbjk@cpan.org>
+
+    * ProcManager.pm: Add a pm_title option to configure the process title
+      assigned to $0
+
+0.18 2007-12-18 James Jurach  <muaddib@erf.net>
+
+     * ProcManager.pm: Remove constraint that parent process cannot die.
+
 0.17
 
 	* ProcManager.pm: Remove constraint that process can't change pid.
