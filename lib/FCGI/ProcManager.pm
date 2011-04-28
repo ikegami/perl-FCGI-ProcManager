@@ -31,12 +31,11 @@ BEGIN {
 
 =head1 SYNOPSIS
 
-{
  # In Object-oriented style.
  use CGI::Fast;
  use FCGI::ProcManager;
  my $proc_manager = FCGI::ProcManager->new({
-	n_processes => 10 
+	n_processes => 10
  });
  $proc_manager->pm_manage();
  while (my $cgi = CGI::Fast->new()) {
@@ -47,7 +46,7 @@ BEGIN {
 
  # This style is also supported:
  use CGI::Fast;
- use FCGI::ProcManager qw(pm_manage pm_pre_dispatch 
+ use FCGI::ProcManager qw(pm_manage pm_pre_dispatch
 			  pm_post_dispatch);
  pm_manage( n_processes => 10 );
  while (my $cgi = CGI::Fast->new()) {
