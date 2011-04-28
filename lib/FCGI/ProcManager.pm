@@ -81,7 +81,7 @@ insert a call to C<pm_pre_dispatch> at the top of the loop, and then
 FCGI::ProcManager attempts to do the right thing for proper shutdowns now.
 
 When it receives a SIGHUP, it sends a SIGTERM to each of its children, and
-then resumes its normal operations.   
+then resumes its normal operations.
 
 When it receives a SIGTERM, it sends a SIGTERM to each of its children, sets
 an alarm(3) "die timeout" handler, and waits for each of its children to
@@ -91,24 +91,10 @@ occurs, the process manager sends a SIGKILL to each of the remaining
 children, and exists with return status 1.
 
 In order to get FastCGI servers to exit upon receiving a signal, it is
-necessary to use its FAIL_ACCEPT_ON_INTR.  See FCGI.pm's description of
-FAIL_ACCEPT_ON_INTR.  Unfortunately, if you want/need to use CGI::Fast, it
-appears currently necessary to modify your installation of FCGI.pm, with
-something like the following:
-
- -*- patch -*-
- --- FCGI.pm     2001/03/09 01:44:00     1.1.1.3
- +++ FCGI.pm     2001/03/09 01:47:32     1.2
- @@ -24,7 +24,7 @@
-  *FAIL_ACCEPT_ON_INTR = sub() { 1 };
-  
-  sub Request(;***$$$) {
- -    my @defaults = (\*STDIN, \*STDOUT, \*STDERR, \%ENV, 0, 0);
- +    my @defaults = (\*STDIN, \*STDOUT, \*STDERR, \%ENV, 0, FAIL_ACCEPT_ON_INTR());
-      splice @defaults,0,@_,@_;
-      RequestX(@defaults);
-  }   
- -*- end patch -*-
+necessary to use its FAIL_ACCEPT_ON_INTR.  See L<FCGI>'s description of
+FAIL_ACCEPT_ON_INTR.  Unfortunately, if you want/need to use L<CGI::Fast>, it
+is currently necessary to run the latest (at the time of writing) development
+version of FCGI.pm. (>= 0.71_02)
 
 Otherwise, if you don't, there is a loop around accept(2) which prevents
 os_unix.c OS_Accept() from returning the necessary error when FastCGI
@@ -122,7 +108,7 @@ around the accept(2) loop, but re-enstate it otherwise.
 The desired (and implemented) effect is to give a request as big a chance as
 possible to succeed and to delay their exits until after their request,
 while allowing the FastCGI servers waiting for new requests to die right
-away. 
+away.
 
 =head1 METHODS
 
