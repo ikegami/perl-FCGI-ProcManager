@@ -4,7 +4,6 @@ use warnings;
 use Carp qw/ confess /;
 use base 'FCGI::ProcManager';
 use Config;
-our $VERSION = '0.02';
 
 sub new {
     my $proto = shift;
@@ -33,13 +32,13 @@ sub handling_init {
 sub pm_post_dispatch {
     my $self = shift;
     if ($self->max_requests > 0 && ++$self->{_request_counter} == $self->max_requests) {
-        $self->pm_exit("safe exit after max_requests");
+        $self->pm_exit("safe exit after max_requests (" . $self->{_request_counter} . ")");
     }
     if ($self->sizecheck_num_requests
         and $self->{_request_counter} # Not the first request
         and $self->{_request_counter} % $self->sizecheck_num_requests == 0
     ) {
-        $self->exit("safe exit due to memory limits exceeded after " . $self->request_count . " requests")
+        $self->exit("safe exit due to memory limits exceeded after " . $self->{_request_counter} . " requests")
             if $self->_limits_are_exceeded;
     }
     $self->SUPER::pm_post_dispatch();
