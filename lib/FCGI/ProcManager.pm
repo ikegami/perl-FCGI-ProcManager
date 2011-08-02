@@ -213,7 +213,7 @@ sub pm_manage {
     last MANAGING_LOOP;
       }
 
-      for (my $s = $this->start_delay(); $s; $s = sleep $s) {};
+      for (my $s = $this->start_delay(); $s > 0; $s -= sleep $s) {};
     }
 
     # this should block until the next server dies.

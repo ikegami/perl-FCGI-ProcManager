@@ -1,6 +1,7 @@
     * ProcManager::Constrained: Add a new FCGI::ProcManager::Constrainted
       subclass which will restart workers safely after a certain number of
       requests, or at certain memory thresholds.
+    * ProcManager: Fix start_delay causing a permanent hang.
 
 0.19 2009-07-22 Gareth Kirwan  <gbjk@cpan.org>
 
