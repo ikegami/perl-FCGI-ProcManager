@@ -16,11 +16,11 @@ BEGIN {
   $VERSION = '0.19'; 
   @ISA = qw(Exporter);
   @EXPORT_OK = qw(pm_manage pm_die pm_wait
-		  pm_write_pid_file pm_remove_pid_file
-		  pm_pre_dispatch pm_post_dispatch
-  		  pm_change_process_name pm_received_signal pm_parameter 
-		  pm_warn pm_notify pm_abort pm_exit
-		  $SIG_CODEREF);
+          pm_write_pid_file pm_remove_pid_file
+          pm_pre_dispatch pm_post_dispatch
+          pm_change_process_name pm_received_signal pm_parameter 
+          pm_warn pm_notify pm_abort pm_exit
+          $SIG_CODEREF);
   $EXPORT_TAGS{all} = \@EXPORT_OK;
   $FCGI::ProcManager::Default = 'FCGI::ProcManager';
 }
@@ -35,7 +35,7 @@ BEGIN {
  use CGI::Fast;
  use FCGI::ProcManager;
  my $proc_manager = FCGI::ProcManager->new({
-	n_processes => 10
+    n_processes => 10
  });
  $proc_manager->pm_manage();
  while (my $cgi = CGI::Fast->new()) {
@@ -47,7 +47,7 @@ BEGIN {
  # This style is also supported:
  use CGI::Fast;
  use FCGI::ProcManager qw(pm_manage pm_pre_dispatch
-			  pm_post_dispatch);
+              pm_post_dispatch);
  pm_manage( n_processes => 10 );
  while (my $cgi = CGI::Fast->new()) {
    pm_pre_dispatch();
@@ -133,12 +133,12 @@ sub new {
   $init ||= {};
 
   my $this = { 
-	      role => "manager",
-	      start_delay => 0,
-	      die_timeout => 60,
+          role => "manager",
+          start_delay => 0,
+          die_timeout => 60,
         pm_title => 'perl-fcgi-pm',
-	      %$init
-	     };
+          %$init
+         };
   bless $this, ref($proto)||$proto;
 
   $this->{PIDS} = {};
@@ -146,9 +146,9 @@ sub new {
   # initialize signal constructions.
   unless ($this->no_signals()) {
     $this->{sigaction_no_sa_restart} =
-	POSIX::SigAction->new('FCGI::ProcManager::sig_sub');
+    POSIX::SigAction->new('FCGI::ProcManager::sig_sub');
     $this->{sigaction_sa_restart} =
-	POSIX::SigAction->new('FCGI::ProcManager::sig_sub',undef,POSIX::SA_RESTART);
+    POSIX::SigAction->new('FCGI::ProcManager::sig_sub',undef,POSIX::SA_RESTART);
   }
 
   return $this;
@@ -200,17 +200,17 @@ sub pm_manage {
   PIDS: while (keys(%{$this->{PIDS}}) < $this->n_processes()) {
 
       if (my $pid = fork()) {
-	# the manager remembers the server.
-	$this->{PIDS}->{$pid} = { pid=>$pid };
+    # the manager remembers the server.
+    $this->{PIDS}->{$pid} = { pid=>$pid };
         $this->pm_notify("server (pid $pid) started");
 
       } elsif (! defined $pid) {
-	return $this->pm_abort("fork: $!");
+    return $this->pm_abort("fork: $!");
 
       } else {
-	$this->{MANAGER_PID} = $manager_pid;
-	# the server exits the managing loop.
-	last MANAGING_LOOP;
+    $this->{MANAGER_PID} = $manager_pid;
+    # the server exits the managing loop.
+    last MANAGING_LOOP;
       }
 
       for (my $s = $this->start_delay(); $s; $s = sleep $s) {};
@@ -256,9 +256,9 @@ sub managing_init {
   # -- we want start the shutdown sequence immediately upon SIGTERM.
   unless ($this->no_signals()) {
     sigaction(SIGTERM, $this->{sigaction_no_sa_restart}) or
-	$this->pm_warn("sigaction: SIGTERM: $!");
+    $this->pm_warn("sigaction: SIGTERM: $!");
     sigaction(SIGHUP,  $this->{sigaction_no_sa_restart}) or
-	$this->pm_warn("sigaction: SIGHUP: $!");
+    $this->pm_warn("sigaction: SIGHUP: $!");
     $SIG_CODEREF = sub { $this->sig_manager(@_) };
   }
 
@@ -531,7 +531,7 @@ default object if one is not passed in, e.g., a method call.
 sub self_or_default {
   return @_ if defined $_[0] and !ref $_[0] and $_[0] eq 'FCGI::ProcManager';
   if (!defined $_[0] or (ref($_[0]) ne 'FCGI::ProcManager' and
-			 !UNIVERSAL::isa($_[0],'FCGI::ProcManager'))) {
+             !UNIVERSAL::isa($_[0],'FCGI::ProcManager'))) {
     $Q or $Q = $FCGI::ProcManager::Default->new;
     unshift @_, $Q;
   }
