@@ -1,3 +1,6 @@
+0.21 2011-08-02 Tomas Doran  <bobtfish@bobtfish.net>
+    * Ship a working dist.
+
 0.20 2011-08-02 Gareth Kirwan  <gbjk@cpan.org>
     * ProcManager::Constrained: Add a new FCGI::ProcManager::Constrainted
       subclass which will restart workers safely after a certain number of
