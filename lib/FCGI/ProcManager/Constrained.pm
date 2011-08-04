@@ -70,6 +70,8 @@ sub _check_size {
 
 sub _load {
     my $mod = shift;
+    $mod =~ s/::/\//g;
+    $mod .= '.pm';
     eval { require($mod); 1; }
 }
 our $USE_SMAPS;
