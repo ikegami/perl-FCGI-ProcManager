@@ -1,3 +1,7 @@
+0.22 2011-08-04 Tomas Doran  <bobtfish@bobtfish.net>
+    * Ship a version of FCGI::ProcManager::Constrainted which actually
+      works as advertised.
+
 0.21 2011-08-02 Tomas Doran  <bobtfish@bobtfish.net>
     * Ship a working dist.
 
