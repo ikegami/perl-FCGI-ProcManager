@@ -332,7 +332,7 @@ sub pm_wait {
   my ($this) = self_or_default(@_);
 
   # wait for the next server to die.
-  next if (my $pid = wait()) < 0;
+  return if (my $pid = wait() < 0);
 
   # notify when one of our servers have died.
   delete $this->{PIDS}->{$pid} and

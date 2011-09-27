@@ -1,3 +1,7 @@
+0.23
+    * Fix pm_wait routine to exit without a warning
+    * Fix pm_wait to correctly detect child processes which have died.
+
 0.22 2011-08-04 Tomas Doran  <bobtfish@bobtfish.net>
     * Ship a version of FCGI::ProcManager::Constrainted which actually
       works as advertised.
