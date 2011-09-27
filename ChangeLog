@@ -1,4 +1,4 @@
-0.23
+0.23 2011-09-27 Tomas Doran  <bobtfish@bobtfish.net>
     * Fix pm_wait routine to exit without a warning
     * Fix pm_wait to correctly detect child processes which have died.
     * Fix to return SIGCHLD handler to it's default state in the
