@@ -181,6 +181,9 @@ sub pm_manage {
   my ($this,%values) = self_or_default(@_);
   map { $this->pm_parameter($_,$values{$_}) } keys %values;
 
+  local $SIG{CHLD}; # Replace the SIGCHLD default handler in case
+                    # somebody shit on it whilst loading code.
+
   # skip to handling now if we won't be managing any processes.
   $this->n_processes() or return;
 
