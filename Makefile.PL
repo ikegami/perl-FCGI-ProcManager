@@ -18,5 +18,10 @@ WriteMakefile
    ($] >= 5.005 ?
     (ABSTRACT   => 'A perl-based FastCGI process manager',
      AUTHOR     => 'James E Jurach (muaddib@erf.net)') : ()),
-   dist         => { COMPRESS => 'gzip', SUFFIX => 'gz' }
+   dist         => { COMPRESS => 'gzip', SUFFIX => 'gz' },
+    META_MERGE => {
+        resources => {
+            repository  =>      'git://git.shadowcat.co.uk/catagits/FCGI-ProcManager',
+        },
+    },
   );

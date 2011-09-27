@@ -3,7 +3,8 @@
     * Fix pm_wait to correctly detect child processes which have died.
     * Fix to return SIGCHLD handler to it's default state in the
       pm_manage loop so that loading code which sets SIGCHLD to ignore
-      won't interfear with normal operation.
+      won't interfere with normal operation.
+    * Add repository metadata.
 
 0.22 2011-08-04 Tomas Doran  <bobtfish@bobtfish.net>
     * Ship a version of FCGI::ProcManager::Constrainted which actually
