@@ -1,3 +1,9 @@
+0.24 2011-10-04 Tomas Doran  <bobtfish@bobtfish.net>
+    * Further fix to pm_wait routine to find the correct PID and remove it
+      (fixing logical error introduced in the last release), noted by Vadim
+      Dashkevich
+    * Document (somewhat) FCGI::ProcManager::Constrainted
+
 0.23 2011-09-27 Tomas Doran  <bobtfish@bobtfish.net>
     * Fix pm_wait routine to exit without a warning
     * Fix pm_wait to correctly detect child processes which have died.

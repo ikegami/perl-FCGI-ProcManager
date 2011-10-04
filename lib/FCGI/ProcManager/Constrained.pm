@@ -204,3 +204,24 @@ sub _linux_getppid { return Linux::Pid::getppid() }
 
 1;
 
+=head1 NAME
+
+FCGI::ProcManager::Constrained - Process manager with constraints
+
+=head1 SYNOPSIS
+
+    $ENV{PM_MAX_REQUESTS} = 1000;
+    $ENV{PM_SIZECHECK_NUM_REQUESTS} = 10;
+    $ENV{PM_MAX_SIZE} = 4096;
+
+=head1 DESCRIPTION
+
+Subclass of L<FCGI::ProcManager> which adds checks for memory limits
+like L<Apache::SizeLimit>.
+
+=head1 AUTHORS, COPYRIGHT AND LICENSE
+
+See L<FCGI::ProcManager>.
+
+=cut
+
