@@ -365,7 +365,7 @@ sub pm_write_pid_file {
     return;
   }
   print $PIDFILE "$$\n" or die "Could not print PID: $!";
-  close $PIDFILE or die "Could not close PID file";
+  close $PIDFILE or die "Could not close PID file: $!";
 }
 
 =head2 pm_remove_pid_file
