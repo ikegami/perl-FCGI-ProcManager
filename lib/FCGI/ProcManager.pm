@@ -359,12 +359,13 @@ specified, it uses the value of the C<pid_fname> parameter.
 sub pm_write_pid_file {
   my ($this,$fname) = self_or_default(@_);
   $fname ||= $this->pid_fname() or return;
-  if (!open PIDFILE, ">$fname") {
+  my $PIDFILE
+  if (!open $PIDFILE, ">$fname") {
     $this->pm_warn("open: $fname: $!");
     return;
   }
-  print PIDFILE "$$\n";
-  close PIDFILE;
+  print $PIDFILE "$$\n" or die "Could not print PID: $!";
+  close $PIDFILE or die "Could not close PID file";
 }
 
 =head2 pm_remove_pid_file

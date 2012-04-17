@@ -1,3 +1,5 @@
+    * Notice errors writing out the PID file and abort.
+
 0.24 2011-10-04 Tomas Doran  <bobtfish@bobtfish.net>
     * Further fix to pm_wait routine to find the correct PID and remove it
       (fixing logical error introduced in the last release), noted by Vadim
