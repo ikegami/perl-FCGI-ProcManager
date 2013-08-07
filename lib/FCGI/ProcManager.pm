@@ -103,7 +103,7 @@ servers blocking on accept(2) receive the SIGTERM or SIGHUP.
 FCGI::ProcManager uses POSIX::sigaction() to override the default SA_RESTART
 policy used for perl's %SIG behavior.  Specifically, the process manager
 never uses SA_RESTART, while the child FastCGI servers turn off SA_RESTART
-around the accept(2) loop, but re-enstate it otherwise.
+around the accept(2) loop, but reinstate it otherwise.
 
 The desired (and implemented) effect is to give a request as big a chance as
 possible to succeed and to delay their exits until after their request,
