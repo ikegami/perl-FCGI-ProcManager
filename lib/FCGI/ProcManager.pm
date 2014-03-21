@@ -70,7 +70,7 @@ when they die (via wait(2)).
 C<pm_manage> provides too hooks:
 
  C<managing_init> - called just before the manager enters the manager loop.
- C<handling_init> - called just before a server is returns from C<pm_manage>
+ C<handling_init> - called just before a server returns from C<pm_manage>
 
 It is necessary for the caller, when implementing its request loop, to
 insert a call to C<pm_pre_dispatch> at the top of the loop, and then
