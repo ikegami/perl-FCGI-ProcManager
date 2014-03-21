@@ -121,10 +121,11 @@ Constructs a new process manager.  Takes an option has of initial parameter
 values, and assigns these to the constructed object HASH, overriding any
 default values.  The default parameter values currently are:
 
- role         => manager
- start_delay  => 0
- die_timeout  => 60
- pm_title => 'perl-fcgi-pm'
+ role            => manager
+ start_delay     => 0
+ die_timeout     => 60
+ pm_title        => 'perl-fcgi-pm'
+ pm_server_title => 'perl-fcgi'
 
 =cut
 
@@ -133,10 +134,11 @@ sub new {
   $init ||= {};
 
   my $this = { 
-          role => "manager",
-          start_delay => 0,
-          die_timeout => 60,
-        pm_title => 'perl-fcgi-pm',
+          role            => "manager",
+          start_delay     => 0,
+          die_timeout     => 60,
+          pm_title        => 'perl-fcgi-pm',
+          pm_server_title => 'perl-fcgi',
           %$init
          };
   bless $this, ref($proto)||$proto;
@@ -455,7 +457,7 @@ sub handling_init {
   }
 
   # change the name of this process as it appears in ps(1) output.
-  $this->pm_change_process_name("perl-fcgi");
+  $this->pm_change_process_name($this->pm_parameter('pm_server_title'));
 }
 
 =head2 pm_pre_dispatch
